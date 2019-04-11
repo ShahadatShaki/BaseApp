@@ -3,6 +3,7 @@
     package="com.acoder.baseapplication">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".Utility.MyApplication"
@@ -12,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ScanQR"></activity>
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.HomePage"></activity>
+        <activity android:name=".Activity.ScanQR" />
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

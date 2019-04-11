@@ -1,7 +1,8 @@
 package com.acoder.baseapplication.Activity;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.acoder.baseapplication.ModelClass.ModelResponseGET;
 import com.acoder.baseapplication.R;
 import com.acoder.baseapplication.Utility.ApiClient;
+import com.acoder.baseapplication.databinding.LoginActivityBinding;
 
 import java.io.IOException;
 
@@ -17,16 +19,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Context context;
+    LoginActivityBinding b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        b = DataBindingUtil.setContentView(this,R.layout.login_activity);
         context = this;
 
+        b.signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, HomePage.class));
+            }
+        });
         getNearbyPlaces();
     }
 

@@ -9,7 +9,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="55dp"
         android:background="@color/toolbarColor"
         app:titleTextColor="@color/toolbarTextAndIconColor"
         app:theme="@style/ToolbarColoredBackArrow"

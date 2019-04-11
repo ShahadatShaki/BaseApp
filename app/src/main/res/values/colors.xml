@@ -6,9 +6,9 @@
     <!--<color name="colorPrimaryDark">#1d88dc</color>-->
     <color name="appColor">#666bae</color>
     <!--<color name="appColor">#2196f3</color>-->
-    <color name="toolbarColor">#fff</color>
+    <color name="toolbarColor">#666bae</color>
     <!--<color name="toolbarColor">#fff</color>-->
-    <color name="toolbarTextAndIconColor">#666bae</color>
+    <color name="toolbarTextAndIconColor">#fff</color>
     <!--<color name="toolbarTextAndIconColor">#2196f3</color>-->
     <color name="colorAccent">#666bae</color>
     <!--<color name="colorAccent">#2196f3</color>-->

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BaseApplication</string>
+    <string name="allow">Allow</string>
+    <string name="message_no_camera_permission_snackbar">This app need your camera permission to continue. Please allow permission</string>
 </resources>
