@@ -1,4 +1,4 @@
-package com.acoder.baseapplication;
+package com.acoder.students;
 
 import org.junit.Test;
 

@@ -1,49 +1,24 @@
-package com.acoder.baseapplication.Utility;
+package com.acoder.students.Utility;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
-import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.design.widget.Snackbar;
+import com.google.android.material.snackbar.Snackbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.acoder.baseapplication.R;
+import com.acoder.students.R;
 import com.crashlytics.android.Crashlytics;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
-import java.math.BigInteger;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import com.squareup.picasso.Transformation;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -112,8 +87,6 @@ public class Constants {
         }
     }
 
-
-
     public static void showProcessDialogNotCancleable(Context context) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please wait");
@@ -162,83 +135,6 @@ public class Constants {
         }
     }
 
-    public static void deleteAllCacheFile(Context context) {
-        ArrayList<String> allFile = getOfflineList(context, ALL_FILE);
-        for (int i = 0; i < allFile.size(); i++) {
-            //context.deleteFile(allFile.get(i));
-
-            saveOffline(context, allFile.get(i), null);
-        }
-    }
-
-    public static void deleteCacheFile(Context context, String file) {
-        context.deleteFile(file);
-    }
-
-    public static <CLASS> void saveOffline(Context context, String file, CLASS data) {
-
-        try {
-            ArrayList<String> allFiles = getOfflineList(context, ALL_FILE);
-            if (allFiles != null) {
-                if (!allFiles.contains(file)) {
-                    allFiles.add(file);
-                    if (!file.equals(ALL_FILE)) {
-                        saveOffline(context, ALL_FILE, allFiles);
-                    }
-                }
-            } else {
-                allFiles = new ArrayList<>();
-                allFiles.add(ALL_FILE);
-                saveOffline(context, ALL_FILE, allFiles);
-            }
-
-        } catch (Exception e) {
-        }
-
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = context.openFileOutput(file, MODE_PRIVATE);
-            ObjectOutputStream objectOutputStream = null;
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(data);
-            objectOutputStream.close();
-        } catch (Exception e) {
-
-//            Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public static <CLASS> CLASS getOfflineSingle(Context context, String file) {
-
-        CLASS items = null;
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = context.openFileInput(file);
-            ObjectInputStream objectInputStream = null;
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            items = (CLASS) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (Exception e) {
-//            Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
-        }
-        return items;
-    }
-
-    public static <CLASS> ArrayList<CLASS> getOfflineList(Context context, String file) {
-
-        ArrayList<CLASS> items = new ArrayList<>();
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = context.openFileInput(file);
-            ObjectInputStream objectInputStream = null;
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            items = (ArrayList<CLASS>) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (Exception e) {
-//            Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
-        }
-        return items;
-    }
 
     public static void showNoInternetSnackbar(final Context context, View view) {
 
@@ -261,13 +157,36 @@ public class Constants {
 
     }
 
-    public static void loadImage(ImageView imageView, String url) {
+    public static void loadImageLand(ImageView imageView, String url) {
         try {
             Picasso.get()
                     .load(url)
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_background)
                     .resize(1024, 720)
+                    .centerCrop()
+                    .into(imageView);
+        } catch (Exception e) {
+            Crashlytics.logException(e);
+        }
+    }
+
+
+    public static void loadImageSqure(ImageView imageView, String url, int cornerRadius, int borderRadius) {
+        try {
+            Transformation transformation = new RoundedTransformationBuilder()
+                    .borderColor(Color.WHITE)
+                    .borderWidthDp(borderRadius)
+                    .cornerRadiusDp(cornerRadius)
+                    .oval(false)
+                    .build();
+
+            Picasso.get()
+                    .load(url)
+                    .placeholder(R.drawable.round_shape_5dp_corner_light_aysh)
+                    .error(R.drawable.round_shape_5dp_corner_light_aysh)
+                    .transform(transformation)
+                    .resize(800, 800)
                     .centerCrop()
                     .into(imageView);
         } catch (Exception e) {

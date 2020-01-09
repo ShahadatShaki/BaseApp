@@ -1,4 +1,4 @@
-package com.acoder.baseapplication.ModelClass;
+package com.acoder.students.ModelClass;
 
 
 import com.google.gson.annotations.Expose;

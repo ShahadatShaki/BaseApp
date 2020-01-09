@@ -1,4 +1,4 @@
-package com.acoder.baseapplication.Utility;
+package com.acoder.students.Utility;
 
 /**
  * Created by SHAKI on 19-Mar-18.
