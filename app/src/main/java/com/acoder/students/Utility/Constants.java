@@ -98,7 +98,6 @@ public class Constants {
         }
     }
 
-
     public static void showProcessDialogCustomText(Context context, String message) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(message);
@@ -134,7 +133,6 @@ public class Constants {
             Log.d("Dialog", "dissmissProcess: " + e.getLocalizedMessage());
         }
     }
-
 
     public static void showNoInternetSnackbar(final Context context, View view) {
 
