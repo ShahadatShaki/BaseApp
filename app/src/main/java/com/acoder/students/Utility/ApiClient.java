@@ -11,6 +11,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -30,6 +31,11 @@ public class ApiClient {
 
 
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        okHttpClient.addInterceptor(logging);
+
         okHttpClient.readTimeout(30, TimeUnit.SECONDS);
         okHttpClient.connectTimeout(30, TimeUnit.SECONDS);
 
