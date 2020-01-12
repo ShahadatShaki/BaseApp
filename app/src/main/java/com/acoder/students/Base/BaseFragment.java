@@ -55,6 +55,7 @@ public abstract class BaseFragment extends Fragment {
 
         layoutInflater = inflater;
         viewGroup = container;
+        binding = DataBindingUtil.inflate(layoutInflater, layoutResourceId(), viewGroup, false);
         return binding.getRoot();
     }
 
@@ -68,7 +69,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public <B> B getBinding() {
-        return (B) DataBindingUtil.inflate(layoutInflater, layoutResourceId(), viewGroup, false);
+        return (B) binding;
     }
 
 
