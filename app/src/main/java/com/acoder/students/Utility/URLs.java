@@ -5,7 +5,7 @@ package com.acoder.students.Utility;
  */
 public class URLs {
 
-    public static String ROOT_URL_MAIN = "https://api.happihub.gq/api/v1/";
+    public static String ROOT_URL_MAIN = "https://yourdomain.com/";
     public static boolean isLive = false;
 
 

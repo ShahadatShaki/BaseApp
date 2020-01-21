@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Shaki on 5/12/2017.
  */
 
-public class ModelResponseGETSingle<Item> {
+public class CommonResponseSingle<Item> {
 
     @SerializedName("mgs")
     @Expose
