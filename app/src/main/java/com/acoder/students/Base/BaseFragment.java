@@ -9,7 +9,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -104,13 +107,28 @@ public abstract class BaseFragment extends Fragment {
 //    }
 
     public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = null;
+        if (context == null) return false;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
-            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                final Network network = connectivityManager.getActiveNetwork();
+                if (network != null) {
+                    final NetworkCapabilities nc = connectivityManager.getNetworkCapabilities(network);
+
+                    return (nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                            nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI));
+                }
+            } else {
+                NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+                for (NetworkInfo tempNetworkInfo : networkInfos) {
+                    if (tempNetworkInfo.isConnected()) {
+                        return true;
+                    }
+                }
+            }
         }
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        return false;
     }
 
 
