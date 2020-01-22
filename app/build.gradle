@@ -77,7 +77,11 @@ dependencies {
     //    Shimmer view
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    //Load Image
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //for making design pixel perfect
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
 
 }
