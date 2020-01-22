@@ -83,6 +83,12 @@ dependencies {
     //for making design pixel perfect
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
+    //For flixible layout (profile activity)
+    implementation 'com.google.android:flexbox:1.1.0'
+
+    //for compress image file
+    implementation 'id.zelory:compressor:2.1.0'
+
 
 }
 
