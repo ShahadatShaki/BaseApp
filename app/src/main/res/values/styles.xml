@@ -8,6 +8,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="windowNoTitle">true</item>
     </style>
 
@@ -26,5 +27,13 @@
         <item name="colorControlHighlight">@color/grey_60</item>
         <item name="colorControlNormal">@color/grey_40</item>
     </style>
+
+
+    <declare-styleable name="RoundShape">
+        <attr format="dimension" name="shape_roundRect_borderWidth"/>
+        <attr format="dimension" name="shape_roundRect"/>
+        <attr format="color" name="shape_roundRect_borderColor"/>
+    </declare-styleable>
+
 
 </resources>
