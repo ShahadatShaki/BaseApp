@@ -1,6 +1,7 @@
 package com.acoder.students.Activity;
 
 import android.view.MenuItem;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 
@@ -27,6 +28,7 @@ public class WebViewActivity extends BaseActivity {
 
         setToolbar(title);
         //Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
+        binding.webView.setWebViewClient(new WebViewClient());
 
         binding.webView.loadUrl(url);
     }

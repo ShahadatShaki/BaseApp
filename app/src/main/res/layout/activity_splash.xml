@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/appColor"
+        android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!-- <TextView
+             android:id="@+id/appNameTxt"
+             android:layout_width="0dp"
+             style="@style/Roboto_bold_20"
+             android:layout_height="wrap_content"
+             android:gravity="center_horizontal"
+             android:text="@string/app_name"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+
+         <TextView
+             android:id="@+id/copyright"
+             android:layout_width="0dp"
+             style="@style/Roboto_regular_8"
+             android:layout_height="wrap_content"
+             android:gravity="center_horizontal"
+             android:text="@string/developed_by"
+             android:layout_marginBottom="@dimen/_4sdp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"/>-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

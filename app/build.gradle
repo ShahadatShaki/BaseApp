@@ -90,6 +90,9 @@ dependencies {
     //Custom Shape
     implementation 'com.github.florent37:shapeofview:1.4.7'
 
+    //for pin input forgot password
+    implementation 'com.github.GoodieBag:Pinview:v1.4'
+
 
 }
 
