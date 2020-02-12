@@ -22,7 +22,7 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void initComponent() {
 
-        binding = (ActivityWebViewBinding) getBinding();
+        binding =  getBinding();
         String title = getIntent().getStringExtra("title");
         String url = getIntent().getStringExtra("url");
 

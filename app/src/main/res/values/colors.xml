@@ -23,6 +23,7 @@
     <color name="green_color_app">#02b875</color>
     <color name="yellow_color_app">#FFA800</color>
 
+    <color name="shimmer_color">#8e8e8e</color>
 
     <color name="cool_bogus_selected_color">#ffcc42</color>
     <color name="like_color">#fb3958</color>

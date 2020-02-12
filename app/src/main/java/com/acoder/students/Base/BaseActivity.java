@@ -196,7 +196,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
     public Context getContext() {
         return this;
     }
@@ -292,18 +291,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
     public void enableBackButton() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
-
-
-
 
     public void setToolbar(String name) {
         Toolbar toolbar = findViewById(R.id.toolbar);
