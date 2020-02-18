@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -306,11 +307,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
+    public void callNumber(String number){
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null));
+        startActivity(intent);
+    }
     @Override
     protected void onStart() {
 
