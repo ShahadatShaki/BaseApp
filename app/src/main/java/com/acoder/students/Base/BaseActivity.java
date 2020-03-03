@@ -8,8 +8,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -17,6 +15,9 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,6 +31,7 @@ import android.widget.ImageView;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import com.acoder.students.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -48,7 +50,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private Activity mActivity;
-    private ViewDataBinding binding;
 
 
     public Context context;
@@ -83,7 +84,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public<B> B getBinding() {
-        return  (B)DataBindingUtil.setContentView(this, getLayoutResourceFile());
+
+        return  (B) DataBindingUtil.setContentView(this, getLayoutResourceFile());
     }
 
 
