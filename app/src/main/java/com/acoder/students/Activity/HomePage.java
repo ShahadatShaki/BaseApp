@@ -37,10 +37,10 @@ public class HomePage extends BaseActivity {
     }
 
     public void getUserProfile() {
-//        viewModel.getUserProfile().observe(this, response->{
-//
-//            showSuccessToast(response.getMsg());
-//        });
+        viewModel.getUserProfile().observe(this, response->{
+
+            showSuccessToast(response.getMsg());
+        });
     }
 
 
