@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class CommonResponseSingle<Item> {
 
-    @SerializedName("mgs")
+    @SerializedName("result")
     @Expose
     private String msg;
     @SerializedName("reported")
