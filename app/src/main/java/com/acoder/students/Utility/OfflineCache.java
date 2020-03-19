@@ -32,7 +32,7 @@ public class OfflineCache {
     //<editor-fold desc="Handle Cache">
 
 
-    public void deleteAllCacheFile() {
+    public  static void deleteAllCacheFile() {
         ArrayList<String> allFile = getOfflineList(ALL_FILE);
         for (int i = 0; i < allFile.size(); i++) {
             //context.deleteFile(allFile.get(i));
@@ -41,11 +41,11 @@ public class OfflineCache {
         }
     }
 
-    public void deleteCacheFile(String file) {
+    public  static void deleteCacheFile(String file) {
         context.deleteFile(file);
     }
 
-    public <CLASS> void saveOffline(String file, CLASS data) {
+    public  static <CLASS> void saveOffline(String file, CLASS data) {
 
         try {
             ArrayList<String> allFiles = getOfflineList(ALL_FILE);
@@ -78,7 +78,7 @@ public class OfflineCache {
         }
     }
 
-    public <CLASS> CLASS getOfflineSingle(String file) {
+    public  static <CLASS> CLASS getOfflineSingle(String file) {
 
         CLASS items = null;
         FileInputStream fileInputStream = null;
@@ -94,7 +94,7 @@ public class OfflineCache {
         return items;
     }
 
-    public <CLASS> ArrayList<CLASS> getOfflineList(String file) {
+    public static  <CLASS> ArrayList<CLASS> getOfflineList(String file) {
 
         ArrayList<CLASS> items = new ArrayList<>();
         FileInputStream fileInputStream = null;
