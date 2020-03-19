@@ -38,7 +38,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.acoder.students.Base.BaseActivity.ALL_FILE;
 
 
 public abstract class BaseFragment extends Fragment {
@@ -194,72 +193,6 @@ public abstract class BaseFragment extends Fragment {
         FancyToast.makeText(context, "" + txt, FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
     }
 
-    public <CLASS> void saveOffline(String file, CLASS data) {
 
-        try {
-            ArrayList<String> allFiles = getOfflineList(ALL_FILE);
-            if (allFiles != null) {
-                if (!allFiles.contains(file)) {
-                    allFiles.add(file);
-                    if (!file.equals(ALL_FILE)) {
-                        saveOffline(ALL_FILE, allFiles);
-                    }
-                }
-            } else {
-                allFiles = new ArrayList<>();
-                allFiles.add(ALL_FILE);
-                saveOffline(ALL_FILE, allFiles);
-            }
-
-        } catch (Exception e) {
-        }
-
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = context.openFileOutput(file, MODE_PRIVATE);
-            ObjectOutputStream objectOutputStream = null;
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(data);
-            objectOutputStream.close();
-        } catch (Exception e) {
-            int i = 0;
-//            Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public <CLASS> CLASS getOfflineSingle(String file) {
-
-        CLASS items = null;
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = context.openFileInput(file);
-            ObjectInputStream objectInputStream = null;
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            items = (CLASS) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (Exception e) {
-//            Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
-        }
-        return items;
-    }
-
-    public <CLASS> ArrayList<CLASS> getOfflineList(String file) {
-
-        ArrayList<CLASS> items = new ArrayList<>();
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = context.openFileInput(file);
-            ObjectInputStream objectInputStream = null;
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            items = (ArrayList<CLASS>) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (Exception e) {
-//            Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
-        }
-        if (items == null) {
-            return new ArrayList<>();
-        }
-        return items;
-    }
 
 }
