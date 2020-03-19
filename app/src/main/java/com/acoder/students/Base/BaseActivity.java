@@ -74,26 +74,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
-
-
     protected abstract int getLayoutResourceFile();
 
     protected abstract void initComponent();
-
-
-
 
     public<B> B getBinding() {
 
         return  (B) DataBindingUtil.setContentView(this, getLayoutResourceFile());
     }
 
-
     private void initVariable() {
         context = getApplicationContext();
         mActivity = BaseActivity.this;
     }
-
 
     public void showProgressDialog() {
         runOnUiThread(new Runnable() {
@@ -123,8 +116,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             });
         }
     }
-
-
 
     public boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
@@ -294,10 +285,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    public void enableBackButton() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-    }
+
 
     public void setToolbar(String name) {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -308,6 +296,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void setToolbar(String name, boolean enableBackBtn) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(name);
+
+        if (enableBackBtn)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //What to do on back clicked
+                finish();
+            }
+        });
+    }
 
     public void callNumber(String number){
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null));
