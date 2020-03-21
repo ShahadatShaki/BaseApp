@@ -16,6 +16,9 @@ public class CommonResponseSingle<Item> {
     @SerializedName("reported")
     @Expose
     private boolean reported;
+    @SerializedName("success")
+    @Expose
+    private boolean success;
     @SerializedName("data")
     @Expose
     private Item items = null;
@@ -42,5 +45,13 @@ public class CommonResponseSingle<Item> {
 
     public void setReported(boolean reported) {
         this.reported = reported;
+    }
+
+    public boolean isSuccess() {
+        return success ;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

@@ -32,10 +32,10 @@ public class UserControlViewModel extends AndroidViewModel {
 
     public MutableLiveData<CommonResponseSingle> getUserProfile() {
 
-        MutableLiveData<CommonResponseSingle> userRegistrationDataResponse = new MutableLiveData<>();
+        MutableLiveData<CommonResponseSingle> liveData = new MutableLiveData<>();
 
-
-        ApiClient.getApiClient().getUserProfile().subscribeOn(Schedulers.io())
+        ApiClient.getApiClient().getUserProfile()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<CommonResponseSingle<UserProfile>>() {
                     @Override
@@ -43,18 +43,23 @@ public class UserControlViewModel extends AndroidViewModel {
                     }
 
                     @Override
-                    public void onSuccess(CommonResponseSingle<UserProfile> userProfileCommonResponseSingle) {
-
-                        userRegistrationDataResponse.postValue(userProfileCommonResponseSingle);
+                    public void onSuccess(CommonResponseSingle<UserProfile> response) {
+                        liveData.postValue(response);
                     }
 
                     @Override
                     public void onError(Throwable e) {
 
+                        CommonResponseSingle response = new CommonResponseSingle();
+                        response.setMsg(e.getLocalizedMessage());
+                        response.setSuccess(false);
+
+                        liveData.postValue(response);
+
                     }
                 });
 
-        return userRegistrationDataResponse;
+        return liveData;
 
     }
 

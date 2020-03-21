@@ -1,6 +1,7 @@
 package com.acoder.students.Utility;
 
-import com.acoder.students.BuildConfig;
+import androidx.databinding.library.baseAdapters.BuildConfig;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
