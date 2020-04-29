@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * Created by Shaki on 5/12/2017.
  */
 
-public class ModelResponseGET<Item> {
+public class CommonResponseArray<Item> {
 
-    @SerializedName("msg")
+    @SerializedName("message")
     @Expose
     private String  success;
     @SerializedName("data")

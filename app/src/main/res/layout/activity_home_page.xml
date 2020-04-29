@@ -12,6 +12,13 @@
 
         <include layout="@layout/tool_bar" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            app:lottie_rawRes="@raw/update_app"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            android:layout_height="@dimen/_200ssdp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/recycleView"

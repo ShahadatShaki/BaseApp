@@ -8,7 +8,6 @@ android {
         targetSdkVersion 29
         versionCode 1
         vectorDrawables.useSupportLibrary = true
-
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -105,6 +104,8 @@ dependencies {
     //for pin input forgot password
     implementation 'com.github.GoodieBag:Pinview:v1.4'
 
+    //animate drawable
+    implementation 'com.airbnb.android:lottie:3.0.1'
 
 }
 

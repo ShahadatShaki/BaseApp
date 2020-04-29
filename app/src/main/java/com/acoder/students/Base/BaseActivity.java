@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,33 +18,42 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.text.Html;
 import android.transition.Explode;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.viewbinding.ViewBinding;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.acoder.students.BuildConfig;
+import com.acoder.students.ModelClass.VersionControlModel;
 import com.acoder.students.R;
+import com.acoder.students.Utility.SharedPreferencesEnum;
+import com.acoder.students.ViewModel.UserControlViewModel;
+import com.acoder.students.databinding.AdminMessageDialogBinding;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.picasso.Picasso;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
+
+import static android.text.util.Linkify.ALL;
+import static androidx.databinding.DataBindingUtil.inflate;
+import static com.acoder.students.R.layout.admin_message_dialog;
+import static com.acoder.students.R.style.DialogTheme;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -56,12 +66,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     ShimmerFrameLayout shimmerFrameLayout;
     private View loadingView, noDataView;
 
+    UserControlViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         context = this;
+        viewModel = ViewModelProviders.of(this).get(UserControlViewModel.class);
 
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         getWindow().setExitTransition(new Explode());
@@ -72,15 +84,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         initComponent();
 
+
     }
 
     protected abstract int getLayoutResourceFile();
 
     protected abstract void initComponent();
 
-    public<B> B getBinding() {
+    public <B> B getBinding() {
 
-        return  (B) DataBindingUtil.setContentView(this, getLayoutResourceFile());
+        return (B) DataBindingUtil.setContentView(this, getLayoutResourceFile());
     }
 
     private void initVariable() {
@@ -127,13 +140,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-
-
-
-//    public void initLoader() {
-//        loadingView = (LinearLayout) findViewById(R.id.loadingView);
-//        noDataView = (LinearLayout) findViewById(R.id.noDataView);
-//    }
 
     public void showLoader() {
         if (loadingView != null) {
@@ -194,7 +200,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return this;
     }
 
-
     public void showSuccessToast(String txt) {
         FancyToast.makeText(mActivity, "" + txt, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
     }
@@ -229,7 +234,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         dialog.show();
 
     }
-
 
     public void showAlertDialog(String title, String message) {
         AlertDialog.Builder builder;
@@ -285,8 +289,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
-
     public void setToolbar(String name) {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -313,10 +315,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-    public void callNumber(String number){
+    public void callNumber(String number) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null));
         startActivity(intent);
     }
+
     @Override
     protected void onStart() {
 
@@ -360,5 +363,96 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    public void checkForUpdate() {
+        //        showProgressDialog("Signing Up..");
+        viewModel.getVersionControlModel().observe(this, response -> {
+            //            hideProgressDialog();
+            if (response != null) {
+                if (response.isSuccess()) {
+                    checkAppUpdate((VersionControlModel) response.getData());
+                } else {
+                    showFailedToast(response.getMessage());
+                }
+            } else {
+                showFailedToast(getString(R.string.something_went_wrong));
+            }
+
+        });
+    }
+
+    boolean appVersionDialogViewing = false;
+
+    private void checkAppUpdate(VersionControlModel versionControlModel) {
+        if (versionControlModel == null)
+            return;
+
+        if (appVersionDialogViewing)
+            return;
+
+
+        final Integer versionCode = BuildConfig.VERSION_CODE;
+
+        if (versionControlModel.getAppVersion() > versionCode) {
+
+            appVersionDialogViewing = true;
+
+            String text = versionControlModel.getMessage();
+
+            AdminMessageDialogBinding binding = inflate(getLayoutInflater(), admin_message_dialog, null, false);
+
+            final Dialog dialog = new Dialog(getContext(), DialogTheme);
+            dialog.setContentView(binding.getRoot());
+
+
+            binding.updateAppBtn.setVisibility(View.VISIBLE);
+            binding.tvMessage.setAutoLinkMask(ALL);
+            binding.title.setText(versionControlModel.getTitle());
+            binding.tvMessage.setText(Html.fromHtml(text));
+
+
+            if (versionControlModel.getForce()) {
+                dialog.setCancelable(false);
+                binding.btnClose.setVisibility(View.GONE);
+            } else {
+                binding.btnClose.setVisibility(View.VISIBLE);
+                dialog.setCancelable(true);
+            }
+
+            if(versionCode<=versionControlModel.getForceableVersion()){
+                dialog.setCancelable(false);
+                binding.btnClose.setVisibility(View.GONE);
+            }
+
+
+
+
+            if (!versionControlModel.getForce()) {
+                Log.d("checkAppUpdate", "checkAppUpdate: " + SharedPreferencesEnum.getInt(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION));
+                if (SharedPreferencesEnum.getInt(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION) == versionControlModel.getAppVersion()) {
+//                    return;
+                }
+            }
+
+
+            binding.btnClose.setOnClickListener(view -> {
+                if (versionControlModel.getForce()) {
+                    finish();
+                } else {
+                    SharedPreferencesEnum
+                            .put(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION, versionControlModel.getAppVersion());
+                    dialog.dismiss();
+                }
+            });
+
+
+            binding.updateAppBtn.setOnClickListener(view -> {
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            });
+            dialog.show();
+
+        }
+
+    }
 
 }

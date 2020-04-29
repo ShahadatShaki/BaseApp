@@ -28,6 +28,18 @@
         <item name="colorControlNormal">@color/grey_40</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <!-- No backgrounds, titles or window float -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/Transparent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
 
     <declare-styleable name="RoundShape">
         <attr format="dimension" name="shape_roundRect_borderWidth"/>

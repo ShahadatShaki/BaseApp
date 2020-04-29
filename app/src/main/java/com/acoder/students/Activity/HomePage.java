@@ -34,11 +34,13 @@ public class HomePage extends BaseActivity {
 
         getUserProfile();
 
+        checkForUpdate();
+
     }
 
     public void getUserProfile() {
         viewModel.getUserProfile().observe(this, response->{
-            showSuccessToast(response.getMsg());
+            showSuccessToast(response.getMessage());
         });
     }
 

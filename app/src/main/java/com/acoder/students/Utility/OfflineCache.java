@@ -20,7 +20,7 @@ public class OfflineCache {
 
     public static final String ALL_FILE = "ALL_FILE";
     public static final String USER_PROFILE_FILE = "USER_PROFILE_FILE";
-    public static final String USER_FAVOURITE_PACKEGES = "USER_FAVOURITE_PACKEGES";
+    public static final String APP_VERSION = "APP_VERSION";
     public static final String RECENT_BUS_SEARCH = "RECENT_BUS_SEARCH";
     public static final String HOME_BANNER_IMAGES = "HOME_BANNER_IMAGES";
     public static final String BUS_TERMINALS = "BUS_TERMINALS";

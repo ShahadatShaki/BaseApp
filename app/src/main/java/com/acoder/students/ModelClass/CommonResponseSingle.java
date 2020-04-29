@@ -23,11 +23,11 @@ public class CommonResponseSingle<Item> {
     @Expose
     private Item items = null;
 
-    public String getMsg() {
+    public String getMessage() {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public void setMessage(String msg) {
         this.msg = msg;
     }
 
@@ -35,7 +35,7 @@ public class CommonResponseSingle<Item> {
         return items;
     }
 
-    public void setObject(Item items) {
+    public void setData(Item items) {
         this.items = items;
     }
 
