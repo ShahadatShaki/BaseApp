@@ -417,7 +417,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             }
 
-            if (versionCode <= versionControlModel.getForceableVersion()) {
+            if (versionCode < versionControlModel.getForceableVersion()) {
                 dialog.setCancelable(false);
                 binding.btnClose.setVisibility(View.GONE);
             }
