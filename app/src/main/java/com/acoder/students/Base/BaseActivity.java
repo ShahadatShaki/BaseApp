@@ -394,20 +394,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         if (versionControlModel.getAppVersion() > versionCode) {
 
-            appVersionDialogViewing = true;
-
-            String text = versionControlModel.getMessage();
-
-            AdminMessageDialogBinding binding = inflate(getLayoutInflater(), admin_message_dialog, null, false);
+            AdminMessageDialogBinding binding = inflate(getLayoutInflater(), R.layout.admin_message_dialog, null, false);
 
             final Dialog dialog = new Dialog(getContext(), DialogTheme);
             dialog.setContentView(binding.getRoot());
 
-
             binding.updateAppBtn.setVisibility(View.VISIBLE);
             binding.tvMessage.setAutoLinkMask(ALL);
             binding.title.setText(versionControlModel.getTitle());
-            binding.tvMessage.setText(Html.fromHtml(text));
+            binding.tvMessage.setText(Html.fromHtml(versionControlModel.getMessage()));
 
 
             if (versionControlModel.getForce()) {
@@ -416,32 +411,22 @@ public abstract class BaseActivity extends AppCompatActivity {
             } else {
                 binding.btnClose.setVisibility(View.VISIBLE);
                 dialog.setCancelable(true);
+
+                if (SharedPreferencesEnum.getInt(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION) == versionControlModel.getAppVersion()) {
+                    return;
+                }
             }
 
-            if(versionCode<=versionControlModel.getForceableVersion()){
+            if (versionCode <= versionControlModel.getForceableVersion()) {
                 dialog.setCancelable(false);
                 binding.btnClose.setVisibility(View.GONE);
             }
 
 
-
-
-            if (!versionControlModel.getForce()) {
-                Log.d("checkAppUpdate", "checkAppUpdate: " + SharedPreferencesEnum.getInt(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION));
-                if (SharedPreferencesEnum.getInt(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION) == versionControlModel.getAppVersion()) {
-//                    return;
-                }
-            }
-
-
             binding.btnClose.setOnClickListener(view -> {
-                if (versionControlModel.getForce()) {
-                    finish();
-                } else {
-                    SharedPreferencesEnum
-                            .put(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION, versionControlModel.getAppVersion());
-                    dialog.dismiss();
-                }
+                SharedPreferencesEnum
+                        .put(SharedPreferencesEnum.Key.APP_UPDATE_SUPPRESED_VERSION, versionControlModel.getAppVersion());
+                dialog.dismiss();
             });
 
 
@@ -450,6 +435,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
             });
             dialog.show();
+            appVersionDialogViewing = true;
+
 
         }
 
