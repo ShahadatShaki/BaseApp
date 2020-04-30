@@ -11,7 +11,7 @@
         android:gravity="center"
         android:paddingStart="@dimen/_30ssdp"
         android:paddingEnd="@dimen/_30ssdp"
-        android:background="@color/Transparent"
+        android:background="@color/dialog_background_color"
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
