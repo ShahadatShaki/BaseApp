@@ -107,6 +107,10 @@ dependencies {
     //animate drawable
     implementation 'com.airbnb.android:lottie:3.0.1'
 
+
+    //Textview drawable
+    implementation 'com.github.woxingxiao:VectorCompatTextView:2.7-androidx'
+
 }
 
 //apply plugin: 'com.google.gms.google-services'
