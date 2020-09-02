@@ -8,7 +8,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.snackbar.Snackbar;
+
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,8 +22,13 @@ import android.widget.Toast;
 import com.acoder.students.R;
 import com.crashlytics.android.Crashlytics;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import java.io.File;
+
+import id.zelory.compressor.Compressor;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -155,13 +165,12 @@ public class Constants {
 
     }
 
-    public static void loadImageLand(ImageView imageView, String url) {
+    public static void loadImage(ImageView imageView, String url) {
         try {
             Picasso.get()
                     .load(url)
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_background)
-                    .resize(1024, 720)
                     .centerCrop()
                     .into(imageView);
         } catch (Exception e) {
@@ -169,6 +178,18 @@ public class Constants {
         }
     }
 
+    public static void loadImage(ImageView imageView, Uri url) {
+        try {
+            Picasso.get()
+                    .load(url)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background)
+                    .centerCrop()
+                    .into(imageView);
+        } catch (Exception e) {
+            Crashlytics.logException(e);
+        }
+    }
 
     public static void loadImageSqure(ImageView imageView, String url, int cornerRadius, int borderRadius) {
         try {
@@ -192,7 +213,65 @@ public class Constants {
         }
     }
 
+    public static void showSuccessToast(Context context, String txt) {
+        FancyToast.makeText(context, "" + txt, FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+    }
+
+    public static void showFailedToast(Context context, String txt) {
+        FancyToast.makeText(context, "" + txt, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+    }
+
+    public static File compresssImage(Context context, File accualImageFile) {
+        File file = null;
+        int fileLen = (int) (accualImageFile.length() / 1024);
+        int convertQuality = 75;
+
+        if (fileLen > 10000) {
+            convertQuality = 30;
+        } else if (fileLen > 3000)
+            convertQuality = 50;
+
+        try {
+            file = new Compressor(context)
+                    .setMaxWidth(1080)
+                    .setQuality(convertQuality)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/Happihub").getAbsolutePath())
+                    .compressToFile(accualImageFile);
+        } catch (Exception e) {
+            Toast.makeText(context, "Unable to process the image, Please change or recapture the image", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
 
 
+        return file;
+    }
+
+    public static void fullScreenImageSingle(Context context, String url) {
+        final Dialog dialog = new Dialog(context, R.style.DialogTheme);
+        dialog.setContentView(R.layout.full_screen_image);
+        PhotoView imageView = dialog.findViewById(R.id.image);
+
+        loadImage(imageView, url);
+
+        dialog.show();
+
+    }
+
+    public static void fullScreenImageSingle(Context context, Uri url) {
+
+        try {
+            final Dialog dialog = new Dialog(context, R.style.DialogTheme);
+            dialog.setContentView(R.layout.full_screen_image);
+            PhotoView imageView = dialog.findViewById(R.id.image);
+
+            loadImage(imageView, url);
+
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, context.getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 }
