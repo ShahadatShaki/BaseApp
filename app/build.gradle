@@ -113,6 +113,9 @@ dependencies {
     //Textview drawable
     implementation 'com.github.woxingxiao:VectorCompatTextView:2.7-androidx'
 
+    //Handle runtime permission
+    implementation 'gun0912.ted:tedpermission:2.2.3'
+
 }
 
 //apply plugin: 'com.google.gms.google-services'
