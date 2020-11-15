@@ -4,17 +4,18 @@ package com.acoder.students.ModelClass;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Shaki on 5/12/2017.
  */
 
-public class CommonResponseArray<Item> {
+public class CommonResponseArray<Item> implements Serializable {
 
     @SerializedName("message")
     @Expose
-    private String  success;
+    private String message;
     @SerializedName("data")
     @Expose
     private ArrayList<Item> object = null;
@@ -24,7 +25,11 @@ public class CommonResponseArray<Item> {
     @SerializedName("total")
     @Expose
     private String total;
+    @SerializedName("success")
+    @Expose
+    private boolean success;
 
+    private int code;
 
 
     public ArrayList<Item> getData() {
@@ -35,12 +40,12 @@ public class CommonResponseArray<Item> {
         this.object = object;
     }
 
-    public String getSuccess() {
-        return success;
+    public String getMessage() {
+        return message;
     }
 
-    public void setSuccess(String success) {
-        this.success = success;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getErrorMgs() {
@@ -57,5 +62,21 @@ public class CommonResponseArray<Item> {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public boolean isSuccess() {
+        return success ;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public int getCode() {
+        return code ;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

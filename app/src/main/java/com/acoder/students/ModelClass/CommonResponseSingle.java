@@ -4,15 +4,17 @@ package com.acoder.students.ModelClass;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Shaki on 5/12/2017.
  */
 
-public class CommonResponseSingle<Item> {
+public class CommonResponseSingle<Item>  implements Serializable {
 
     @SerializedName("result")
     @Expose
-    private String msg;
+    private String message;
     @SerializedName("reported")
     @Expose
     private boolean reported;
@@ -22,13 +24,15 @@ public class CommonResponseSingle<Item> {
     @SerializedName("data")
     @Expose
     private Item items = null;
+    private int code;
+
 
     public String getMessage() {
-        return msg;
+        return message;
     }
 
     public void setMessage(String msg) {
-        this.msg = msg;
+        this.message = msg;
     }
 
     public Item getData() {
@@ -53,5 +57,13 @@ public class CommonResponseSingle<Item> {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }
