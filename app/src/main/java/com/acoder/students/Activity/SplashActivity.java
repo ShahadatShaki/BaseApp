@@ -13,6 +13,12 @@ import com.acoder.students.R;
 import com.acoder.students.Utility.SharedPreferencesEnum;
 import com.acoder.students.databinding.ActivitySplashBinding;
 
+/**
+ * Created by Shaki
+ * 01685558803
+ * shahadat.shaki03@gmail.com
+ */
+
 public class SplashActivity extends BaseActivity {
 
     ActivitySplashBinding binding;

@@ -1,13 +1,16 @@
 package com.acoder.students.Activity;
 
-import android.view.MenuItem;
 import android.webkit.WebViewClient;
-
-import androidx.annotation.NonNull;
 
 import com.acoder.students.Base.BaseActivity;
 import com.acoder.students.R;
 import com.acoder.students.databinding.ActivityWebViewBinding;
+
+/**
+ * Created by Shaki
+ * 01685558803
+ * shahadat.shaki03@gmail.com
+ */
 
 public class WebViewActivity extends BaseActivity {
 
@@ -22,7 +25,7 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void initComponent() {
 
-        binding =  getBinding();
+        binding = getBinding();
         String title = getIntent().getStringExtra("title");
         String url = getIntent().getStringExtra("url");
 

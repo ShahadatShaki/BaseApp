@@ -12,6 +12,12 @@ import com.acoder.students.R;
 import com.acoder.students.ViewModel.UserControlViewModel;
 import com.acoder.students.databinding.LoginActivityBinding;
 
+/**
+ * Created by Shaki
+ * 01685558803
+ * shahadat.shaki03@gmail.com
+ */
+
 public class LoginActivity extends BaseActivity {
 
     private Context context;
