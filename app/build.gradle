@@ -17,6 +17,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                def stringsFile = android.sourceSets.main.res.sourceFiles.find { it.name.equals 'strings.xml' }
+                def appNaame = new XmlParser().parse(stringsFile).string.find { it.@name.equals 'app_name' }.text()
+                def formattedDate = new Date().format('yyyyMMddHHmmss')
+                outputFileName = "${appNaame}_${getVersionName()}_${variant.buildType.name}_${formattedDate}.apk"
+            }
+        }
     }
 
     buildFeatures {
