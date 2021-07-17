@@ -44,7 +44,7 @@ public abstract class BaseFragment extends Fragment {
     private ViewDataBinding binding;
     private ProgressDialog progressDialog;
     private LinearLayout loadingView, noDataView;
-    private ShimmerFrameLayout shimmerFrameLayout;
+    private LinearLayout shimmerFrameLayout;
     private Context context;
     LayoutInflater layoutInflater;
     ViewGroup viewGroup;
@@ -173,16 +173,16 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-
-    public void initShimmer(ShimmerFrameLayout view) {
+    public void initShimmer(LinearLayout view) {
         this.shimmerFrameLayout = view;
         shimmerFrameLayout.setVisibility(View.VISIBLE);
-        shimmerFrameLayout.startShimmer();
     }
 
     public void stopShimmer() {
-        shimmerFrameLayout.stopShimmer();
-        shimmerFrameLayout.setVisibility(View.GONE);
+
+        if (shimmerFrameLayout != null) {
+            shimmerFrameLayout.setVisibility(View.GONE);
+        }
     }
 
     public void showSuccessToast(String txt) {

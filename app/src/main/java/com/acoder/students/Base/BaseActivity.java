@@ -17,35 +17,29 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.Html;
 import android.transition.Explode;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.acoder.students.BuildConfig;
 import com.acoder.students.ModelClass.VersionControlModel;
 import com.acoder.students.R;
 import com.acoder.students.Utility.SharedPreferencesEnum;
 import com.acoder.students.ViewModel.UserControlViewModel;
 import com.acoder.students.databinding.AdminMessageDialogBinding;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -56,21 +50,18 @@ import java.util.List;
 
 import static android.text.util.Linkify.ALL;
 import static androidx.databinding.DataBindingUtil.inflate;
-import static com.acoder.students.R.layout.admin_message_dialog;
 import static com.acoder.students.R.style.DialogTheme;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public Context context;
+    LinearLayout shimmerFrameLayout;
+    UserControlViewModel viewModel;
+    boolean appVersionDialogViewing = false;
     private ProgressDialog progressDialog;
     private Activity mActivity;
-
-
-    public Context context;
-    ShimmerFrameLayout shimmerFrameLayout;
     private View loadingView, noDataView;
-
-    UserControlViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +135,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-
     public void showLoader() {
         if (loadingView != null) {
             loadingView.setVisibility(View.VISIBLE);
@@ -174,7 +164,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-
     public Activity getActivity() {
         return this;
     }
@@ -198,7 +187,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             finish();
         }
     }
-
 
     public Context getContext() {
         return this;
@@ -292,7 +280,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 
-
     public void setToolbar(String name) {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -348,24 +335,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         Picasso.get().load(imgUrl).placeholder(R.drawable.ic_place_image).error(R.drawable.ic_place_image).into(imageView);
     }
 
-    public void initShimmer(ShimmerFrameLayout view) {
+    public void initShimmer(LinearLayout view) {
         this.shimmerFrameLayout = view;
         shimmerFrameLayout.setVisibility(View.VISIBLE);
-        shimmerFrameLayout.startShimmer();
     }
 
     public void stopShimmer() {
-        shimmerFrameLayout.stopShimmer();
-        shimmerFrameLayout.setVisibility(View.GONE);
+        if (shimmerFrameLayout != null) {
+            shimmerFrameLayout.setVisibility(View.GONE);
+        }
     }
-
-    @Override
-    protected void onPause() {
-        if (shimmerFrameLayout != null)
-            shimmerFrameLayout.stopShimmer();
-        super.onPause();
-    }
-
 
     public void checkForUpdate() {
         //        showProgressDialog("Signing Up..");
@@ -384,8 +363,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-    boolean appVersionDialogViewing = false;
-
     private void checkAppUpdate(VersionControlModel versionControlModel) {
         if (versionControlModel == null)
             return;
@@ -394,7 +371,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             return;
 
 
-        final Integer versionCode = BuildConfig.VERSION_CODE;
+        final Integer versionCode = 0;
 
         if (versionControlModel.getAppVersion() > versionCode) {
 
