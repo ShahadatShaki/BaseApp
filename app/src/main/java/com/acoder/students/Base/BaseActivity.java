@@ -40,6 +40,7 @@ import com.acoder.students.R;
 import com.acoder.students.Utility.SharedPreferencesEnum;
 import com.acoder.students.ViewModel.UserControlViewModel;
 import com.acoder.students.databinding.AdminMessageDialogBinding;
+import com.acoder.students.databinding.NoItemLayoutBinding;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -447,5 +448,12 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .check();
     }
 
+    public static void checkEmptyData(int size, NoItemLayoutBinding b) {
+        if (size == 0) {
+            b.mainLayout.setVisibility(View.VISIBLE);
+        } else {
+            b.mainLayout.setVisibility(View.GONE);
+        }
+    }
 
 }
