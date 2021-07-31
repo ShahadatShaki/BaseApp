@@ -1,6 +1,7 @@
 package com.acoder.students.ModelClass;
 
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -28,6 +29,10 @@ public class CommonResponseArray<Item> implements Serializable {
     @SerializedName("success")
     @Expose
     private boolean success;
+
+    @SerializedName("errors")
+    @Expose
+    private JsonObject errors;
 
     private int code;
 
@@ -78,5 +83,13 @@ public class CommonResponseArray<Item> implements Serializable {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public JsonObject getErrors() {
+        return errors == null ? new JsonObject() : errors;
+    }
+
+    public void setErrors(JsonObject errors) {
+        this.errors = errors;
     }
 }

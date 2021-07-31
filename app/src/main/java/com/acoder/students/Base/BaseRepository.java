@@ -2,50 +2,87 @@ package com.acoder.students.Base;
 
 import androidx.lifecycle.MutableLiveData;
 
-
 import com.acoder.students.ModelClass.CommonResponseArray;
 import com.acoder.students.ModelClass.CommonResponseSingle;
 import com.acoder.students.Utility.OfflineCache;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.TypeAdapter;
+
+import java.util.Iterator;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
 public class BaseRepository {
 
     public CommonResponseSingle getResponseSingle(Throwable e) {
-        int code = 0;
-        try {
-            code = ((HttpException) e).code();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        CommonResponseSingle errorParser = new CommonResponseSingle();
+
+        if (e instanceof HttpException) {
+            ResponseBody body = ((HttpException) e).response().errorBody();
+            Gson gson = new Gson();
+            TypeAdapter<CommonResponseSingle> adapter = gson.getAdapter(CommonResponseSingle.class);
+            try {
+                errorParser = adapter.fromJson(body.string());
+                errorParser.setCode(((HttpException) e).code());
+
+                final JsonObject errorsObject = errorParser.getErrors();
+                Iterator<String> keys = errorParser.getErrors().keySet().iterator();
+                String errors = "";
+                while (keys.hasNext()) {
+                    final String key = keys.next();
+                    final String jsonString = errorsObject.get(key).toString()
+                            .replace("]", "")
+                            .replace("[", "")
+                            .replace("\"", "");
+                    errors = errors + (jsonString + "\n");
+                }
+
+                errorParser.setMessage(errorParser.getMessage() + "\n" + errors);
+            } catch (Exception t) {
+                t.printStackTrace();
+            }
         }
-
-        CommonResponseSingle response = new CommonResponseSingle();
-        response.setMessage(e.getLocalizedMessage());
-        response.setSuccess(false);
-        response.setCode(code);
-
-        return response;
+        errorParser.setSuccess(false);
+        return errorParser;
     }
 
     public CommonResponseArray getResponseArray(Throwable e) {
-        int code = 0;
-        try {
-            code = ((HttpException) e).code();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        CommonResponseArray errorParser = new CommonResponseArray();
+
+        if (e instanceof HttpException) {
+            ResponseBody body = ((HttpException) e).response().errorBody();
+            Gson gson = new Gson();
+            TypeAdapter<CommonResponseArray> adapter = gson.getAdapter(CommonResponseArray.class);
+            try {
+                errorParser = adapter.fromJson(body.string());
+                errorParser.setCode(((HttpException) e).code());
+
+                final JsonObject errorsObject = errorParser.getErrors();
+                Iterator<String> keys = errorParser.getErrors().keySet().iterator();
+                String errors = "";
+                while (keys.hasNext()) {
+                    final String key = keys.next();
+                    final String jsonString = errorsObject.get(key).toString()
+                            .replace("]", "")
+                            .replace("[", "")
+                            .replace("\"", "");
+                    errors = errors + (jsonString + "\n");
+                }
+
+                errorParser.setMessage(errorParser.getMessage() + "\n" + errors);
+            } catch (Exception t) {
+                t.printStackTrace();
+            }
         }
-
-        CommonResponseArray response = new CommonResponseArray();
-        response.setMessage(e.getLocalizedMessage());
-        response.setSuccess(false);
-        response.setCode(code);
-
-        return response;
+        errorParser.setSuccess(false);
+        return errorParser;
     }
 
     public void getOfflineArray(String fileName, MutableLiveData<CommonResponseArray> liveData) {
