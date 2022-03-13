@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.acoder.students.R;
-import com.crashlytics.android.Crashlytics;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.picasso.Picasso;
@@ -93,7 +92,6 @@ public class Constants {
         try {
             progressDialog.show();
         } catch (Exception e) {
-            Crashlytics.logException(e);
         }
     }
 
@@ -174,7 +172,6 @@ public class Constants {
                     .centerCrop()
                     .into(imageView);
         } catch (Exception e) {
-            Crashlytics.logException(e);
         }
     }
 
@@ -187,7 +184,6 @@ public class Constants {
                     .centerCrop()
                     .into(imageView);
         } catch (Exception e) {
-            Crashlytics.logException(e);
         }
     }
 
@@ -209,7 +205,6 @@ public class Constants {
                     .centerCrop()
                     .into(imageView);
         } catch (Exception e) {
-            Crashlytics.logException(e);
         }
     }
 
