@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 31
     defaultConfig {
-        applicationId "com.acoder.students"
+        applicationId "com.acoder.base"
         minSdkVersion 23
         targetSdkVersion 31
         versionCode 1
@@ -108,7 +108,7 @@ dependencies {
     implementation 'com.google.android:flexbox:1.1.0'
 
     //for compress image file
-    implementation 'id.zelory:compressor:2.1.0'
+    implementation 'id.zelory:compressor:3.0.1'
 
     //Custom Shape
     implementation 'com.github.florent37:shapeofview:1.4.7'
