@@ -12,7 +12,7 @@
     <!--<color name="toolbarTextAndIconColor">#2196f3</color>-->
     <color name="colorAccent">#666bae</color>
     <!--<color name="colorAccent">#2196f3</color>-->
-    <color name="colorBackground">#efeff4</color>
+    <color name="colorBackground">#F3F3F3</color>
     <color name="white">#ffffff</color>
     <color name="line_color">#ecf2f2f2</color>
     <color name="gray_app_color">#616770</color>

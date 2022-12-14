@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "631467013691",
+    "project_id": "imagecompressor-fe237",
+    "storage_bucket": "imagecompressor-fe237.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631467013691:android:a66e413825ce26a660ce1e",
+        "android_client_info": {
+          "package_name": "com.acoder.imagecompressor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631467013691-ek72v2d3g15a5cuikpfoumlsh4r92t4g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArrPYvx68oZKRwVNVQFzDvYnk2IrRPB70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631467013691-ek72v2d3g15a5cuikpfoumlsh4r92t4g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
