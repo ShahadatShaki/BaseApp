@@ -46,11 +46,9 @@ public class SplashActivity extends BaseActivity {
             public void run() {
                 // startActvity(SplashActivity.this, MainActivity.class, true);
                 if (SharedPreferencesEnum.getBoolean(SharedPreferencesEnum.Key.IS_LOGIN)) {
-                    // startActvity(SplashActivity.this, MainActivity.class, true);
                     startActivity(new Intent(context, HomePage.class));
                     finish();
                 } else {
-//                     startActvity(SplashActivity.this, SignInActivity.class, true);
                     startActivity(new Intent(SplashActivity.this, HomePage.class));
                     finish();
                 }

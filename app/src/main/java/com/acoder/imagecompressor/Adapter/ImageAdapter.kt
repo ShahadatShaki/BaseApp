@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.acoder.imagecompressor.ModelClass.UserProfile
 import com.acoder.imagecompressor.R
-import com.acoder.imagecompressor.Utility.Constants
 import com.acoder.imagecompressor.databinding.ListUserBinding
 import com.acoder.imagecompressor.intarface.ClickListener
 import java.util.*

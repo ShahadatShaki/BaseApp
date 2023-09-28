@@ -3,140 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackground"
-        android:orientation="vertical"
-        android:padding="@dimen/_24ssdp"
-        tools:context=".Activity.HomePage">
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16ssdp"
-            android:layout_marginBottom="@dimen/_4ssdp"
-            android:gravity="center">
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/multipleImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="@dimen/_8ssdp"
-                android:layout_marginBottom="@dimen/_8ssdp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/singleImage"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_40ssdp"
-                        android:layout_height="@dimen/_40ssdp"
-                        android:src="@drawable/multiple_image" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Select Image for Compress"
-                        android:layout_marginStart="16dp"
-                        android:textColor="@color/black_Text_Color"
-                        android:textSize="@dimen/_20ssp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16ssdp"
-            android:text="Compression Settings"
-            android:textColor="@color/gray_app_color"
-            android:textSize="@dimen/_20ssp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16ssdp"
-            android:text="Compression Quality"
-            android:textColor="@color/gray_app_color"
-            android:textSize="@dimen/_12ssp" />
-
-        <com.xw.repo.BubbleSeekBar
-            android:id="@+id/compressQuality"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8ssdp"
-            app:bsb_auto_adjust_section_mark="true"
-            app:bsb_bubble_color="@color/appColor"
-            app:bsb_max="100"
-            app:bsb_progress="50"
-            app:bsb_second_track_color="@color/accept_color"
-            app:bsb_thumb_color="@color/appColor"
-            app:bsb_thumb_text_size="14sp"
-            app:bsb_touch_to_seek="true"
-            app:bsb_track_color="@color/gray_app_color"
-            app:bsb_track_size="@dimen/_6ssdp" />
-
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/black" />
-
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/_16ssdp"-->
-        <!--            android:text="Compression Quality"-->
-        <!--            android:textColor="@color/gray_app_color"-->
-        <!--            android:textSize="@dimen/_16ssp" />-->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/compress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:text="Compress" />
-
-            <Button
-                android:id="@+id/saveOnStorage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:text="Save on storage" />
-        </LinearLayout>
-
-
+            android:text="Welcome"
+            android:gravity="center"
+            android:layout_height="match_parent"/>
     </LinearLayout>
+
 </layout>
